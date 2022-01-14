@@ -12,7 +12,7 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Grid = await hre.ethers.getContractFactory("Grid");
+  const Grid = await hre.ethers.getContractFactory("GridFactory");
   const grid = await Grid.deploy();
 
   await grid.deployed();

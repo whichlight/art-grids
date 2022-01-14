@@ -20,11 +20,19 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 
-contract Grid{
+contract GridFactory{
     using SafeMath for uint256;
 
     uint256 dnaDigits = 12; //64*64 or 2^11
     uint256 dnaModulus = 10**dnaDigits;
+
+
+    //create a few grids
+    constructor()  {
+        _generateGrid("yay");
+        _generateGrid("cool");
+        _generateGrid("fun");
+    }
 
     struct Grid {
         //an efficient representation of the grid data.
