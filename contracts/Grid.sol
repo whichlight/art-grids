@@ -4,17 +4,6 @@ pragma solidity ^0.8.0;
 //part of the hardhat sample
 import "hardhat/console.sol";
 
-/* 
-these are standard/existing contracts. can replace them with links to ones on openzeppelin 
-https://docs.openzeppelin.com/contracts/2.x/api/token/erc721
-https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol
-https://docs.openzeppelin.com/contracts/4.x/access-control
-
-
-import "./erc721.sol";
-import "./ownable.sol";
-*/
-
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
@@ -25,7 +14,6 @@ contract GridFactory{
 
     uint256 dnaDigits = 12; //64*64 or 2^11
     uint256 dnaModulus = 10**dnaDigits;
-
 
     //create a few grids
     constructor()  {
@@ -60,7 +48,6 @@ contract GridFactory{
     }
 
     //creating a grid based on someone's public key
-
     /*
     this isn't working bc of the address and string conversion 
     function createGridAddress() public {
