@@ -16,7 +16,8 @@ contract GridFactory is ERC721{
 
 
     Counters.Counter private _tokenIds;
-    uint256 dnaDigits = 12; //64*64 or 2^11
+
+    uint256 dnaDigits = 12; //64*64 or 2^11 
     uint256 dnaModulus = 10**dnaDigits;
 
     // token info 
@@ -90,6 +91,7 @@ contract GridFactory is ERC721{
     }
 
 // allow anyone to mint, removed tokenuri
+// need to add restrictions for minding (one per address?)
     function mint(address recipient) public returns (uint256)
     {
         _tokenIds.increment();

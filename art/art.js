@@ -45,7 +45,7 @@ async function getGrid(id){
 }
 
 printGridIds();
-let grid_res = getGrid(2);
+let grid_res = getGrid(1);
 grid_res.then(function(g){
     for(let i=0; i < g.length; i++){
         layer[i]=parseInt(g[i]);
@@ -95,7 +95,7 @@ function draw(){
          
          see here for the binary notation: https://natureofcode.com/book/chapter-7-cellular-automata/
         */
-        layer[i] = CAF(l2[i-1], l2[i], l2[i+1], 3456);
+        layer[i] = CAF(l2[i-1], l2[i], l2[i+1], 012348);
     }
 
     /*
