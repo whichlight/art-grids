@@ -77,6 +77,7 @@ contract GridFactory{
     //retrieve a list of existing grid id's. this is just the index up to the length. 
     // do we want another way to represent id? 
     // is the return calldata or memory 
+    // these return as hex for some reason  (?) 
     function getGridIds() public view returns (uint256[] memory) {
         uint256 len = grids.length;
         uint256[] memory result = new uint256[](len);
