@@ -86,7 +86,7 @@ function draw(){
 
     //skip edges and determine the next row 
     for(let i = 1; i<layer.length-1; i++){
-        layer[i] = CA(l2[i-1], l2[i], l2[i+1]);
+        layer[i] = CA16784(l2[i-1], l2[i], l2[i+1]);
     }
 }
 
@@ -128,9 +128,28 @@ function CA13784(a,b,c){
     }
 }
 
-function CA(a,b,c){
+//black triangles downwards
+function CA01478(a,b,c){
     let s = 2**a + 2**b + 2**c;
-    if(s == 1 || s == 6 || s == 7 || s ==8 || s == 3){
+    if(s == 0 || s == 1 || s == 4 || s ==7 || s == 8){
+        return 1; 
+    }else {
+        return 0; 
+    }
+}
+
+function CA4(a,b,c){
+    let s = 2**a + 2**b + 2**c;
+    if(s == 4){
+        return 1; 
+    }else {
+        return 0; 
+    }
+}
+
+function CA(a,b,c){
+    let s = a*(2**2) + b*(2**1) + c*(2**0);
+    if( s == 7 || s == 6 || s == 0 || s == 1 || s == 2){
         return 1; 
     }else {
         return 0; 
