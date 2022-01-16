@@ -68,15 +68,19 @@ async function getGrid(id) {
 
 printGridIds();
 
-let grid_res = getGrid(1);
-grid_res.then(function (g) {
-    for (let i = 0; i < g.length; i++) {
-        layer[i] = parseInt(g[i]);
-    }
-    seedDna = JSON.parse(JSON.stringify(layer));
-    layers.pop(); //idk why but there's an empty array here, so popping it.
-    playSimulation = true;
-});
+const getSeed = id => {
+    let grid_res = getGrid(id);
+    grid_res.then(function (g) {
+        for (let i = 0; i < g.length; i++) {
+            layer[i] = parseInt(g[i]);
+        }
+        seedDna = JSON.parse(JSON.stringify(layer));
+        layers.pop(); //idk why but there's an empty array here, so popping it.
+        playSimulation = true;
+    });
+};
+
+getSeed(1);
 
 /*
 
@@ -139,7 +143,7 @@ const s = p => {
     p.setup = function () {
         w = p.width;
         h = p.height;
-        // createCanvas(w, h);
+        // p.createCanvas(w, h);
         p.background(255);
         p.frameRate(10);
     };
@@ -194,7 +198,7 @@ const q = p => {
         if (playSimulation) {
             let side = w / seedDna.length;
             for (let i = seedDna.length; i >= 0; i--) {
-                let s = i*side;
+                let s = i * side;
                 p.noStroke();
                 p.fill(seedDna[i] * 255);
                 p.ellipse(w / 2, h / 2, s, s);
@@ -205,17 +209,29 @@ const q = p => {
 
 let seedp5 = new p5(q, 'seedView');
 
+const redrawWorld = () => {
+    worldp5.remove();
+    layer = JSON.parse(JSON.stringify(seedDna));
+    layers = [];
+    worldp5 = new p5(s, 'worldSim');
+    worldp5.draw();
+};
+
 ready(() => {
-    // document.getElementById('seed-select');
+    document
+        .getElementById('seed-select')
+        .addEventListener('change', ({ target: { value } }) => {
+            console.log(value);
+            seedp5.remove();
+            getSeed(value);
+            seedp5 = new p5(q, 'seedView');
+            seedp5.draw();
+            redrawWorld();
+        });
     document
         .getElementById('world-select')
         .addEventListener('change', ({ target: { value } }) => {
-            console.log(value);
             selectedWorld = value;
-            worldp5.remove();
-            layer = JSON.parse(JSON.stringify(seedDna));
-            layers = [];
-            worldp5 = new p5(s, 'worldSim');
-            worldp5.draw();
+            redrawWorld();
         });
 });
