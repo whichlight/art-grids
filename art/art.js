@@ -212,5 +212,10 @@ ready(() => {
         .addEventListener('change', ({ target: { value } }) => {
             console.log(value);
             selectedWorld = value;
+            worldp5.remove();
+            layer = JSON.parse(JSON.stringify(seedDna));
+            layers = [];
+            worldp5 = new p5(s, 'worldSim');
+            worldp5.draw();
         });
 });
