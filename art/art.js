@@ -108,8 +108,14 @@ function CAF(a, b, c, val) {
 }
 
 
-const s = (p) => {
+/*
+ * 
+ * p5 stuff
+ * 
+ */
 
+//simulation
+const s = (p) => {
     p.setup = function() {
         w = p.width;
         h = p.height;
@@ -146,5 +152,35 @@ const s = (p) => {
     }
 };
 
-let myp5 = new p5(s, 'worldSim');
+let worldp5 = new p5(s, 'worldSim');
+
+
+//seed
+const q = (p) => {
+    p.setup = function() {
+        w = p.width;
+        h = p.height;
+        p.createCanvas(w, h);
+        p.background(255);
+        p.frameRate(10);
+        console.log('here');
+    }
+
+    p.draw = function() {
+
+        p.background(0);
+        if (playSimulation) {
+            let side = w / layer.length;
+            for (let i = layer.length; i >= 0; i--) {
+                let s = i;
+                p.noStroke();
+                p.fill(layer[i] * 255);
+                p.ellipse(w / 2, h / 2, s, s);
+            }
+        }
+    }
+
+}
+
+let seedp5 = new p5(q, 'seedView');
 
