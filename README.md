@@ -9,6 +9,9 @@ create a local node
 deploy locally
 >npx hardhat run --network localhost scripts/deploy.js
 
+run static server, in /art run: 
+>live-server 
+
 
 
 # Basic Sample Hardhat Project

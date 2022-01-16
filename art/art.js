@@ -42,7 +42,7 @@ const gridAbi = [
 ];
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
-const gridAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+const gridAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 const gridContract = new ethers.Contract(gridAddress, gridAbi, provider);
 
 function hex2bin(hex) {
@@ -190,7 +190,6 @@ const q = p => {
         p.createCanvas(w, h);
         p.background(255);
         p.frameRate(10);
-        console.log('here');
     };
 
     p.draw = function () {
@@ -221,7 +220,6 @@ ready(() => {
     document
         .getElementById('seed-select')
         .addEventListener('change', ({ target: { value } }) => {
-            console.log(value);
             seedp5.remove();
             getSeed(value);
             seedp5 = new p5(q, 'seedView');
