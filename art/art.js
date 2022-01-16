@@ -137,9 +137,9 @@ function CAF(a, b, c, val) {
 //simulation
 const s = p => {
     p.setup = function () {
-        w = p.width;
-        h = p.height;
-        // p.createCanvas(w, h);
+        simWidth = 300;
+        simHeight = 300;
+        p.createCanvas(simWidth, simHeight);
         p.background(255);
         p.frameRate(10);
     };
@@ -149,7 +149,7 @@ const s = p => {
 
         if (playSimulation) {
             //render
-            let side = w / layer.length;
+            let side = simWidth / layer.length;
             layers.push(JSON.parse(JSON.stringify(layer)));
             layers.forEach(function (l, j) {
                 for (let i = 0; i < l.length; i++) {
@@ -157,7 +157,7 @@ const s = p => {
                     p.noStroke();
                     p.rect(i * side, j * side, side, side);
                 }
-                if (j * side > h) p.noLoop();
+                if (j * side > simHeight) p.noLoop();
             });
 
             //update
