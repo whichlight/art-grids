@@ -29,6 +29,10 @@ contract GridFactory is ERC721{
         _generateGrid("yay");
         _generateGrid("cool");
         _generateGrid("fun");
+        _generateGrid("dobe");
+        _generateGrid("noman");
+        _generateGrid("whichlight");
+
     }
 
     struct Grid {
