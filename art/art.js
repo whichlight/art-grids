@@ -57,13 +57,13 @@ grid_res.then(function(g){
 
 
 function setup(){
-    w = windowWidth; 
-    h = windowHeight; 
-    createCanvas(w, h);
-    background(255);
-    colorMode(HSB, 360, 100, 100,100);
-    noLoop();
-    frameRate(10);
+  w = windowWidth;
+  h = windowHeight;
+  // createCanvas(w, h);
+  background(255);
+  colorMode(HSB, 360, 100, 100, 100);
+  noLoop();
+  frameRate(10);
 }
 
 function draw(){

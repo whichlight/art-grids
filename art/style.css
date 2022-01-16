@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin:24px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+header {
+  margin-bottom: 64px;
+}
+
+h2 {
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-weight: 900;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 25%;
+}
+
+.flex-3 {
+  flex-grow: 3;
+  flex-shrink: 3;
+  flex-basis: 75%;
+}
+
+.selects {
+  margin-bottom: 24px;
+}
+
+.selects select {
+  width: 100px;
+}

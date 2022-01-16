@@ -11,15 +11,61 @@
 
     <script src="art.js"></script>
 
-
-    <style>
-      body {
-        margin:0px;
-      }
-      </style>
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
-  <body>
-    <main>
-    </main>
+  <body class="flex-column">
+    <header class="flex">
+      <div class="flex-column flex-1">
+        <h2>Seeds +</h2>
+        <h2>Worlds</h2>
+      </div>
+      <div class="flex-column flex-3">
+        <span>
+          Each NFT can exist in a wide range of worlds.
+        </span>
+        <span>
+          Click to see how it grows in each.
+        </span>
+        <span>
+          Mint your own seeds too.
+        </span>
+      </div>
+    </header>
+
+    <div class="flex selects">
+      <div class="flex-column flex-1">
+        <h4>
+          Seed NFT
+        </h4>
+        <select name="seed" id="seed-select">
+          <option value="1">Seed 1</option>
+          <option value="2">Seed 2</option>
+          <option value="3">Seed 3</option>
+          <option value="4">Seed 4</option>
+          <option value="5">Seed 5</option>
+        </select>
+      </div>
+      <div class="flex-column flex-3">
+        <h4>
+          Worlds
+        </h4>
+        <select name="world" id="world-select">
+          <option value="1">World 1</option>
+          <option value="2">World 2</option>
+          <option value="3">World 3</option>
+          <option value="4">World 4</option>
+          <option value="5">World 5</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="flex canvases">
+      <div class="flex flex-1">
+        <canvas></canvas>
+      </div>
+      <div class="flex flex-3">
+        <canvas></canvas>
+      </div>
+    </div>
   </body>
 </html>
