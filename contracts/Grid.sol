@@ -92,12 +92,12 @@ contract GridFactory is ERC721{
 
 // allow anyone to mint, removed tokenuri
 // need to add restrictions for minding (one per address?)
-    function mint(address recipient) public returns (uint256)
-    {
-        _tokenIds.increment();
+    function mint(address recipient) public returns (uint256) {
         uint256 newItemId = _tokenIds.current();
         _mint(recipient, newItemId);
       //  _setTokenURI(newItemId, tokenURI); // might need ERC721Full
+        
+        _tokenIds.increment();
         return newItemId;
     }
 }
