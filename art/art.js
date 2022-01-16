@@ -1,6 +1,6 @@
 
-let layer = [];
 let seedDna = [];
+let layer = [];
 let layers = [];
 let playSimulation = false;
 
