@@ -27,6 +27,7 @@ function hex2bin(hex) {
 
 //store the response
 let layer = [];
+let seedDna = [];
 let layers = [];
 let playSimulation = false;
 
@@ -72,6 +73,7 @@ grid_res.then(function (g) {
     for (let i = 0; i < g.length; i++) {
         layer[i] = parseInt(g[i]);
     }
+    seedDna = JSON.parse(JSON.stringify(layer));
     layers.pop(); //idk why but there's an empty array here, so popping it.
     playSimulation = true;
 });
@@ -190,11 +192,11 @@ const q = p => {
     p.draw = function () {
         p.background(0);
         if (playSimulation) {
-            let side = w / layer.length;
-            for (let i = layer.length; i >= 0; i--) {
-                let s = i;
+            let side = w / seedDna.length;
+            for (let i = seedDna.length; i >= 0; i--) {
+                let s = i*side;
                 p.noStroke();
-                p.fill(layer[i] * 255);
+                p.fill(seedDna[i] * 255);
                 p.ellipse(w / 2, h / 2, s, s);
             }
         }
