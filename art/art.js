@@ -16,6 +16,10 @@ const WORLDS = {
     5: 012346, // l layers
     6: 012348, // weiird
     7: 012457, // arrows to the top right
+    8: 025, // diagonal triangles then straigt
+    9: 248, // triangle rows top right
+    10: 2348, //vertical lines with some hatching 
+    11: 1458// checkerboardlike
 };
 
 let selectedWorld = 0;
@@ -100,14 +104,14 @@ getSeed(1);
        012346: l layers
        012348: weiird
        012457: arrows to the top right 
+         025: diagonal triangles then straigt
+   248: triangle rows top right
+   2348: vertical lines with some hatching 
+   1458: checkerboardlike
        
    139: diagonal to left
    4: diagonal to right
    14: triangle and plus
-   025: diagonal triangles then straigt
-   248: triangle rows top right
-   2348: vertical lines with some hatching 
-   1458: checkerboardlike
    13458: cool diagonal and then checkerboard
    1238: diagonal with steps
    1256: arrows to the top left
