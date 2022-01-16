@@ -1,17 +1,40 @@
 
+function ready(fn) {
+    if (document.readyState != 'loading') {
+        fn();
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+
+const WORLDS = {
+    0: 3456, // arrows top left mountains
+    1: 012478, // beautiful
+    2: 15678, // siq light and dark combo
+    3: 123, // melting vibes
+    4: 346, // sawtooth pattern
+    5: 012346, // l layers
+    6: 012348, // weiird
+    7: 012457, // arrows to the top right
+};
+
+let selectedWorld = 0;
+
+//store the response
 let seedDna = [];
 let layer = [];
 let layers = [];
 let playSimulation = false;
-
 
 /*
  * connecting to the chain
  */
 
 const gridAbi = [
-    "function getGridIds() public view returns (uint256[] memory)",
-    "function getGrid(uint256 id) public view returns (uint256)"
+    //get number of grids
+    'function getGridIds() public view returns (uint256[] memory)',
+    //get a particular grid
+    'function getGrid(uint256 id) public view returns (uint256)',
 ];
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -36,7 +59,7 @@ async function printGridIds() {
 async function getGrid(id) {
     let grid = await gridContract.getGrid(id);
     console.log(grid, hex2bin(grid));
-    return hex2bin(grid)
+    return hex2bin(grid);
 }
 
 
@@ -49,11 +72,9 @@ grid_res.then(function (g) {
         layer[i] = parseInt(g[i]);
     }
     seedDna = JSON.parse(JSON.stringify(layer));
-
-    layers.pop(); //idk why but there's an empty array here, so popping it. 
+    layers.pop(); //idk why but there's an empty array here, so popping it.
     playSimulation = true;
 });
-
 
 /*
 
@@ -93,9 +114,9 @@ grid_res.then(function (g) {
 
 function CAF(a, b, c, val) {
     let res = 0;
-    let s = a * (2 ** 2) + b * (2 ** 1) + c * (2 ** 0);
+    let s = a * 2 ** 2 + b * 2 ** 1 + c * 2 ** 0;
     let digits_str = val.toString().split('');
-    var realDigits = digits_str.map(Number)
+    var realDigits = digits_str.map(Number);
 
     realDigits.forEach(function (p) {
         if (s == p) {
@@ -103,28 +124,23 @@ function CAF(a, b, c, val) {
         }
     });
     return res;
-
 }
 
-
 /*
- * 
  * p5 stuff
- * 
  */
 
 //simulation
-const s = (p) => {
-    p.setup = function() {
+const s = p => {
+    p.setup = function () {
         w = p.width;
         h = p.height;
         // createCanvas(w, h);
         p.background(255);
         p.frameRate(10);
-    }
+    };
 
-    p.draw = function() {
-
+    p.draw = function () {
         p.background(0);
 
         if (playSimulation) {
@@ -143,30 +159,33 @@ const s = (p) => {
             //update
             l2 = JSON.parse(JSON.stringify(layer));
 
-            //skip edges and determine the next row 
+            //skip edges and determine the next row
             for (let i = 1; i < layer.length - 1; i++) {
-                layer[i] = CAF(l2[i - 1], l2[i], l2[i + 1], 012478);
+                layer[i] = CAF(
+                    l2[i - 1],
+                    l2[i],
+                    l2[i + 1],
+                    WORLDS[selectedWorld]
+                );
             }
         }
-    }
+    };
 };
 
 let worldp5 = new p5(s, 'worldSim');
 
-
 //seed
-const q = (p) => {
-    p.setup = function() {
+const q = p => {
+    p.setup = function () {
         w = p.width;
         h = p.height;
         p.createCanvas(w, h);
         p.background(255);
         p.frameRate(10);
         console.log('here');
-    }
+    };
 
-    p.draw = function() {
-
+    p.draw = function () {
         p.background(0);
         if (playSimulation) {
             let side = w / seedDna.length;
@@ -177,9 +196,22 @@ const q = (p) => {
                 p.ellipse(w / 2, h / 2, s, s);
             }
         }
-    }
-
-}
+    };
+};
 
 let seedp5 = new p5(q, 'seedView');
 
+ready(() => {
+    // document.getElementById('seed-select');
+    document
+        .getElementById('world-select')
+        .addEventListener('change', ({ target: { value } }) => {
+            console.log(value);
+            selectedWorld = value;
+            worldp5.remove();
+            layer = JSON.parse(JSON.stringify(seedDna));
+            layers = [];
+            worldp5 = new p5(s, 'worldSim');
+            worldp5.draw();
+        });
+});
