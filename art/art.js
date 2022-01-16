@@ -1,3 +1,4 @@
+
 function ready(fn) {
     if (document.readyState != 'loading') {
         fn();
@@ -19,32 +20,15 @@ const WORLDS = {
 
 let selectedWorld = 0;
 
-//hex to binary
-function hex2bin(hex) {
-    let a = parseInt(hex, 16).toString(2);
-    return a;
-}
-
 //store the response
-let layer = [];
 let seedDna = [];
+let layer = [];
 let layers = [];
 let playSimulation = false;
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-//test if i'm connected
-//wow i don't have to sign anything?
-async function printblock() {
-    let num = await provider.getBlockNumber();
-    console.log('connected! currently at block ' + num);
-}
-
-printblock();
-
-//get a grid
-//how to update this without having to do it on each deploy?
-const gridAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+/*
+ * connecting to the chain
+ */
 
 const gridAbi = [
     //get number of grids
@@ -53,7 +37,19 @@ const gridAbi = [
     'function getGrid(uint256 id) public view returns (uint256)',
 ];
 
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const gridAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 const gridContract = new ethers.Contract(gridAddress, gridAbi, provider);
+
+function hex2bin(hex) {
+    let a = parseInt(hex, 16).toString(2);
+    return a;
+}
+
+async function printBlock() {
+    let num = await provider.getBlockNumber();
+    console.log("connected! currently at block " + num);
+}
 
 async function printGridIds() {
     let arr = await gridContract.getGridIds();
@@ -66,6 +62,8 @@ async function getGrid(id) {
     return hex2bin(grid);
 }
 
+
+printBlock();
 printGridIds();
 
 const getSeed = id => {
@@ -133,9 +131,7 @@ function CAF(a, b, c, val) {
 }
 
 /*
- *
  * p5 stuff
- *
  */
 
 //simulation
